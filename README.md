@@ -8,7 +8,7 @@ You just have to follow these short steps to start your project:
  * reconfigure the secured area (default is /admin) and modify the prefix of the FOSUserBundle routes in app/config/routing.yml 
  * create your own bundle
  * create the User entity in your bundle : [Read the FOSUserBundle Documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/master/Resources/doc/index.md)
- * change default entry in app/config/config.yml
+ * change default User class entry in app/config/config.yml under fos_user 
  * if you use Assetic add your bundle in its configuration in app/config/config.yml
 
 I hope this will help kickstart your projects.
