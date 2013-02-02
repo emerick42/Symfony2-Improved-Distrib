@@ -27,7 +27,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ TillidHubBundle, TillidAdminBundle, TillidErrorBundle ]
+    bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -90,7 +90,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: secured_area
-    user_class: Tillid\AdminBundle\Entity\User
+    user_class: Acme\DemoBundle\Entity\User
 
 # Doctrine Extensions Configuration
 stof_doctrine_extensions:
@@ -109,10 +109,3 @@ stof_doctrine_extensions:
             loggable: false
             softdeleteable: false
             uploadable: false
-
-# Services
-services:
-    blog.excerpt:
-        class: Tillid\HubBundle\EventListener\ExcerptCreator
-        tags:
-            - { name: doctrine.event_listener, event: prePersist}
