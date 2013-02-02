@@ -94,7 +94,7 @@ fos_user:
 
 # Doctrine Extensions Configuration
 stof_doctrine_extensions:
-    default_locale: fr
+    default_locale: en
 #    uploadable:
 #        default_file_path:       %kernel.root_dir%/../web/uploads
 #        mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
