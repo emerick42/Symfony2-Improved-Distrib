@@ -1,12 +1,14 @@
 #Symfony2-Improved-Distrib
 
-A Symfony2 distrib improved with FOSUserBundle, DoctrineFixtures and DoctrineExtensions. It also includes Yui-compressor. Everything is preconfigured.
+A Symfony2 distrib improved with FOSUserBundle, DoctrineFixtures and DoctrineExtensions. It also includes Yui-compressor. Everything is preconfigured as possible.
 
 You just have to follow these short steps to start your project:
  * copy the app/config/parameter.yml.dist and fill with your database information
  * install the vendor with composer
  * reconfigure the secured area (default is /admin)
  * create your own bundle
- * create the User entity in your bundle and change default entry in config.yml
+ * create the User entity in your bundle : [Read the FOSUserBundle Documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/master/Resources/doc/index.md)
+ * change default entry in app/config/config.yml
+ * if you use Assetic add your bundle in its configuration in app/config/config.yml
 
 I hope this will help kickstart your projects.
