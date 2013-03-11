@@ -12,3 +12,8 @@ You just have to follow these short steps to start your project:
  * if you use Assetic add your bundle in its configuration in app/config/config.yml
 
 I hope this will help kickstart your projects.
+
+##Changelog
+
+_2013/03/11: **v1.1.0**_
+ * Now using Symfony 2.2
