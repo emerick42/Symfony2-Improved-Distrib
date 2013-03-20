@@ -15,5 +15,8 @@ I hope this will help kickstart your projects.
 
 ##Changelog
 
+_2013/03/20: **v1.1.1**_
+ * Update config.yml to use default locale from parameters.yml
+
 _2013/03/11: **v1.1.0**_
  * Now using Symfony 2.2

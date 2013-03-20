@@ -13,7 +13,7 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    default_locale:  "en"
+    default_locale:  "%locale%"
     trust_proxy_headers: false # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
     trusted_proxies: ~
     session:         ~
@@ -94,7 +94,7 @@ fos_user:
 
 # Doctrine Extensions Configuration
 stof_doctrine_extensions:
-    default_locale: en
+    default_locale: "%locale%"
 #    uploadable:
 #        default_file_path:       %kernel.root_dir%/../web/uploads
 #        mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
