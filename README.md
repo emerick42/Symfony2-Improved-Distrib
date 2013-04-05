@@ -1,6 +1,6 @@
 #Symfony2-Improved-Distrib
 
-A Symfony2 distrib improved with FOSUserBundle, DoctrineFixtures and DoctrineExtensions. It also includes Yui-compressor. Everything is preconfigured as possible.
+A Symfony2 distrib improved with FOSUserBundle, DoctrineFixtures, DoctrineExtensions and DoctrineMigrations. It also includes Yui-compressor. Everything is preconfigured as possible.
 
 You just have to follow these short steps to start your project:
  * copy the app/config/parameter.yml.dist and fill with your database information
@@ -14,6 +14,9 @@ You just have to follow these short steps to start your project:
 I hope this will help kickstart your projects.
 
 ##Changelog
+
+_2013/04/05: **v1.1.2**_
+ * Add Doctrine migrations to Composer dependencies
 
 _2013/03/20: **v1.1.1**_
  * Update config.yml to use default locale from parameters.yml
