@@ -7,3 +7,6 @@
 *~
 /app/config/parameters.yml
 /composer.lock
+/app/bootstrap*
+/app/var/
+/composer.phar
