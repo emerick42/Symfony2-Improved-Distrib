@@ -12,19 +12,19 @@ Here is a list of the main features:
 * includes the java binary for Yui-compressor to compress your JS and CSS files with Assetic
 * reconfigures user's sessions to keep them after cache:clear
 * includes a default Capifony deployment file to handle Assetic, migrations and user's session
-* automatically creates a parameter.yml that you have to fill after a Capifony deploy:setup
+* uses Incenteev to automatically create a parameter.yml that you have to fill after composer install
 
 ##Installation and configuration
 
 ###First things you have to do
 
 You just have to follow these short steps to start your project:
-* copy the app/config/parameter.yml.dist and fill with your database information
 * install the vendor with composer
+* follow instructions to create your parameter.yml
 * reconfigure the secured area (default is /admin) and modify the prefix of the FOSUserBundle routes in app/config/routing.yml 
 * create your own bundle
 * create the User entity in your bundle : [Read the FOSUserBundle Documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/master/Resources/doc/index.md)
-* change default User class entry in app/config/config.yml under fos_user 
+* change default User class entry in app/config/config.yml under fos_user
 * add your bundle in Assetic's configuration in app/config/config.yml
 
 You can also see the optional configurations below to take the best of this distribution.
@@ -39,11 +39,12 @@ There are some mandatory information to provide before using Capifony with this 
 * change your _application name_, _domain name_, _deploy path_, _username_ and _repository address_
 
 You can also change every Capifony settings you want to meet your needs.
-It's basically just an usual Capifony deployment file but configured to handle Assetic, migrations and user's sessions.
+It's basically just a usual Capifony deployment file but configured to handle Assetic, migrations and user's sessions.
 
 ##Changelog
 
 _**develop**_
+* Now using Symfony 2.3
 * Add a default Capifony configuration file
 
 _2013/04/05: **v1.1.2**_

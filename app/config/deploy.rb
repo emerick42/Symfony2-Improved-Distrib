@@ -40,15 +40,6 @@ set :shared_files, ["app/config/parameters.yml"]
 set :shared_children, [web_path + "/uploads", app_path + "/var"]
 set :writable_shared_dirs, [web_path + "/uploads", app_path + "/var"]
 
-# Add parameters.yml
-task :upload_parameters do
-    origin_file = "app/config/parameters.yml"
-    destination_file = shared_path + "/app/config/parameters.yml"
-    try_sudo "mkdir -p #{File.dirname(destination_file)}"
-    top.upload(origin_file, destination_file)
-end
-after "deploy:setup", "upload_parameters"
-
 before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
 
 before "symfony:cache:warmup", "deploy:assetic_dump"
