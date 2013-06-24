@@ -44,9 +44,10 @@ It's basically just a usual Capifony deployment file but configured to handle As
 
 ##Changelog
 
-_**develop**_
+_2013/06/24: **v1.2.0**_
 * Now using Symfony 2.3
 * Add a default Capifony configuration file
+* Upgrade the README to be more understandable
 
 _2013/04/05: **v1.1.2**_
 * Add Doctrine migrations to Composer dependencies
