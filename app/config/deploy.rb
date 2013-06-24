@@ -40,6 +40,15 @@ set :shared_files, ["app/config/parameters.yml"]
 set :shared_children, [web_path + "/uploads", app_path + "/var"]
 set :writable_shared_dirs, [web_path + "/uploads", app_path + "/var"]
 
+# Add parameters.yml
+task :upload_parameters do
+    origin_file = "app/config/parameters.yml"
+    destination_file = shared_path + "/app/config/parameters.yml"
+    try_sudo "mkdir -p #{File.dirname(destination_file)}"
+    top.upload(origin_file, destination_file)
+end
+after "deploy:setup", "upload_parameters"
+
 before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
 
 before "symfony:cache:warmup", "deploy:assetic_dump"
@@ -72,48 +81,49 @@ namespace :sid do
     task :set_shared_folders_permissions, :roles => :app, :except => { :no_release => true } do
         if writable_shared_dirs && permission_method
             dirs = []
-        writable_shared_dirs.each do |link|
-            if shared_children && shared_children.include?(link)
-                absolute_link = shared_path + "/" + link
-            else
-                absolute_link = latest_release + "/" + link
-            end
-            dirs << absolute_link
-        end
-        methods = {
-            :chmod => [
-                "chmod +a \"#{user} allow delete,write,append,file_inherit,directory_inherit\" %s",
-                "chmod +a \"#{webserver_user} allow delete,write,append,file_inherit,directory_inherit\" %s"
-            ],
-            :acl   => [
-                "setfacl -R -m u:#{user}:rwX -m u:#{webserver_user}:rwX %s",
-                "setfacl -dR -m u:#{user}:rwx -m u:#{webserver_user}:rwx %s"
-            ],
-            :chown => ["chown #{webserver_user} %s"]
-        }
-        if methods[permission_method]
-            capifony_pretty_print "--> Setting permissions"
-            if fetch(:use_sudo, false)
-                methods[permission_method].each do |cmd|
-                    sudo sprintf(cmd, dirs.join(' '))
+            writable_shared_dirs.each do |link|
+                if shared_children && shared_children.include?(link)
+                    absolute_link = shared_path + "/" + link
+                else
+                    absolute_link = latest_release + "/" + link
                 end
-            elsif permission_method == :chown
-                puts "    You can't use chown method without sudoing"
-            else
-                dirs.each do |dir|
-                    is_owner = (capture "`echo stat #{dir} -c %U`").chomp == user
-                    if is_owner && permission_method != :chown
-                        methods[permission_method].each do |cmd|
-                            try_sudo sprintf(cmd, dir)
+                dirs << absolute_link
+            end
+            methods = {
+                :chmod => [
+                    "chmod +a \"#{user} allow delete,write,append,file_inherit,directory_inherit\" %s",
+                    "chmod +a \"#{webserver_user} allow delete,write,append,file_inherit,directory_inherit\" %s"
+                ],
+                :acl   => [
+                    "setfacl -R -m u:#{user}:rwX -m u:#{webserver_user}:rwX %s",
+                    "setfacl -dR -m u:#{user}:rwx -m u:#{webserver_user}:rwx %s"
+                ],
+                :chown => ["chown #{webserver_user} %s"]
+            }
+            if methods[permission_method]
+                capifony_pretty_print "--> Setting permissions"
+                if fetch(:use_sudo, false)
+                    methods[permission_method].each do |cmd|
+                        sudo sprintf(cmd, dirs.join(' '))
+                    end
+                elsif permission_method == :chown
+                    puts "    You can't use chown method without sudoing"
+                else
+                    dirs.each do |dir|
+                        is_owner = (capture "`echo stat #{dir} -c %U`").chomp == user
+                        if is_owner && permission_method != :chown
+                            methods[permission_method].each do |cmd|
+                                try_sudo sprintf(cmd, dir)
+                            end
+                        else
+                            puts "    #{dir} is not owned by #{user} or you are using 'chown' method without ':use_sudo'"
                         end
-                    else
-                        puts "    #{dir} is not owned by #{user} or you are using 'chown' method without ':use_sudo'"
                     end
                 end
+                capifony_puts_ok
+            else
+                puts "    Permission method '#{permission_method}' does not exist.".yellow
             end
-            capifony_puts_ok
-        else
-            puts "    Permission method '#{permission_method}' does not exist.".yellow
         end
     end
 end
