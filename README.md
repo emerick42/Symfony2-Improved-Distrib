@@ -19,6 +19,7 @@ Here is a list of the main features:
 ###First things you have to do
 
 You just have to follow these short steps to start your project:
+* copy the app/config/parameter.yml.dist and fill with your database information
 * install the vendor with composer
 * follow instructions to create your parameter.yml
 * reconfigure the secured area (default is /admin) and modify the prefix of the FOSUserBundle routes in app/config/routing.yml 
