@@ -22,6 +22,7 @@ role :app,        domain, :primary => true       # This may be the same as your 
 role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
 
 set  :keep_releases,  1
+after "deploy:update", "deploy:cleanup"
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
